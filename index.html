@@ -13,6 +13,41 @@
 
 <div class="container">
 	<h1 class="center">Simulacion de Memoria RAM</h1>
+	<div class="row">
+		<!--Table-->
+		<div class="col-md-6">
+			<div id="ram" class="table">
+				<table id="table-ram">
+					<tr>
+
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!--Form-->
+		<div class="col-md-6">
+			<div id="form-Process">
+				<form role="form">
+
+					<div class="form-group">
+						<label>Nombre</label>
+						<input type="text" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label>Peso</label>
+						<input type="text" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label>Tiempo de Vida</label>
+						<input type="text" class="form-control">
+					</div>
+				</form>
+				<button id="btnAgregar"  class="btn btn-success btn-lg btn-block">Agregar</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 
@@ -21,6 +56,16 @@
 <script type="text/javascript">
 $(function(){
 
+	//Drawing the Table
+	
+	var table = '<table id="table-ram" class="table">';
+				for(var i=0; i<20;i++)
+				{
+					table+='<tr><td id="row-'+i+'"></td></tr>';
+				}
+					'</tr>'+
+				'</table>';
+	$("#ram").html(table);
 
 
 });
