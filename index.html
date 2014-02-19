@@ -90,49 +90,77 @@ function addProcess()
 		{
 			if(size - weight >= 0)
 			{
+				var major = 0;
+				var isPossibleCounter = 0;
+				for(var i=0; i<20;i++)
+				{
+					var type = $("#row-"+index).attr('class');
+				 		
+				 	if(type == "empty")
+				 	{
+				 		isPossibleCounter++;
+				 	}
+				 	else
+				 	{
+				 		if(isPossibleCounter>major)
+				 		{
+				 			major = isPossibleCounter;
+				 			isPossibleCounter=0;
+				 		}
+				 	}
+				}
 
-				var adding= true;
-				var firtCicle = true;
-				var index = 0;
-				var count = 0;
-				var iter = 0;
-			 	while(adding)
-			 	{
-					
-			 		var type = $("#row-"+index).attr('class');
-			 		
-			 		if(type == "empty")
-			 		{
-			 			$("#row-"+index).html("<p>"+name+"</p>"); 
+				if(weight >= major)
+				{
+					var adding= true;
+					var firtCicle = true;
+					var index = 0;
+					var count = 0;
+					var iter = 0;
+				 	while(adding)
+				 	{
+						
+				 		var type = $("#row-"+index).attr('class');
+				 		
+				 		if(type == "empty")
+				 		{
+				 			$("#row-"+index).html("<p>"+name+"</p>"); 
 
-			 			$("#row-"+index).removeClass('empty').addClass('busy');
-			 			
-			 			if(firtCicle)
-			 			{
-			 				limI = index;
-			 				firtCicle = false;
-			 			}
+				 			$("#row-"+index).removeClass('empty').addClass('busy');
+				 			
+				 			if(firtCicle)
+				 			{
+				 				limI = index;
+				 				firtCicle = false;
+				 			}
 
-			 			count++;	
-			 		}
+				 			count++;	
+				 		}
 
-			 		index++;
+				 		index++;
 
-			 		if(count>=weight)
-			 		{
-			 			adding = false;
-			 		}
+				 		if(count>=weight)
+				 		{
+				 			adding = false;
+				 		}
 
 
-			 		
-			 	}
+				 		
+				 	}
 
-			 	limS = index;
-			 	size-= weight;
+				 	limS = index;
+				 	size-= weight;
 
-			 	
-			 	ms = life * 1000;
-			 	setTimeout(function(){deleteProcess(limI,limS,weight)},ms);
+
+				 	ms = life * 1000;
+				 	setTimeout(function(){deleteProcess(limI,limS,weight)},ms);	
+				}
+				else
+				{
+					alert("Hay memoria pero no para este proceso");
+				}
+
+				
 
 			}
 			else
