@@ -58,7 +58,6 @@ $(function(){
 
 	//Gloabl variables
 	var size = 20;
-
 	//Drawing the Table
 	
 	var table = '<table id="table-ram" class="table">';
@@ -78,13 +77,29 @@ $(function(){
 		var life = $("#life").val();
 		if(validateProcess(name, weight , life))
 		{
-			if(size - life >= 0)
+			if(size - weight >= 0)
 			{
+				var cont = 0;
+			 	while(cont < weight)
+			 	{
+					
+			 		var type = $("#row-"+cont).attr('class');
+			 		if(type == "empty")
+			 		{
+			 			$("#row-"+cont).html("<p id='row-proceces-"+cont+"''>"+name+"</p>"); 
+			 			cont++;
+			 			size--;
+			 		}
+			 		
+			 	}
+
+			 var ms = life * 1000;
+			 setTimeout(function(){deleteProcess()},ms);
 
 			}
 			else
 			{
-				
+				alert("No hay espacio suficiente");
 			}
 		}
 
@@ -104,6 +119,10 @@ function validateProcess(name , weight , life)
 	}
 
 	return band;
+}
+
+function deleteProcess()
+{
 }
 </script>
 
