@@ -44,7 +44,7 @@
 						<input type="text" class="form-control" id="life">
 					</div>
 				</form>
-				<button id="btnAgregar"  class="btn btn-success btn-lg btn-block">Agregar</button>
+				<button id="btnAgregar"  onclick="addProcess()" class="btn btn-success btn-lg btn-block">Agregar</button>
 			</div>
 		</div>
 	</div>
@@ -54,11 +54,14 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
+//Gloabl variables
+	var size = 20;
+
+
+//Drawing the Table
 $(function(){
 
-	//Gloabl variables
-	var size = 20;
-	//Drawing the Table
+	
 	
 	var table = '<table id="table-ram" class="table">';
 				for(var i=0; i<20;i++)
@@ -69,32 +72,67 @@ $(function(){
 				'</table>';
 	$("#ram").html(table);
 
-	//Add process
-	$("#btnAgregar").click(function(){
 
+});
+
+
+
+function addProcess()
+{
 		var name = $("#name").val();
 		var weight = $("#weight").val();
 		var life = $("#life").val();
+		var limI;
+		var limS;
+
+
 		if(validateProcess(name, weight , life))
 		{
 			if(size - weight >= 0)
 			{
-				var cont = 0;
-			 	while(cont < weight)
+
+				var adding= true;
+				var firtCicle = true;
+				var index = 0;
+				var count = 0;
+				var iter = 0;
+			 	while(adding)
 			 	{
 					
-			 		var type = $("#row-"+cont).attr('class');
+			 		var type = $("#row-"+index).attr('class');
+			 		
 			 		if(type == "empty")
 			 		{
-			 			$("#row-"+cont).html("<p id='row-proceces-"+cont+"''>"+name+"</p>"); 
-			 			cont++;
-			 			size--;
+			 			$("#row-"+index).html("<p>"+name+"</p>"); 
+
+			 			$("#row-"+index).removeClass('empty').addClass('busy');
+			 			
+			 			if(firtCicle)
+			 			{
+			 				limI = index;
+			 				firtCicle = false;
+			 			}
+
+			 			count++;	
 			 		}
+
+			 		index++;
+
+			 		if(count>=weight)
+			 		{
+			 			adding = false;
+			 		}
+
+
 			 		
 			 	}
 
-			 var ms = life * 1000;
-			 setTimeout(function(){deleteProcess()},ms);
+			 	limS = index;
+			 	size-= weight;
+
+			 	
+			 	ms = life * 1000;
+			 	setTimeout(function(){deleteProcess(limI,limS,weight)},ms);
 
 			}
 			else
@@ -102,12 +140,7 @@ $(function(){
 				alert("No hay espacio suficiente");
 			}
 		}
-
-	});
-
-
-});
-
+}
 
 function validateProcess(name , weight , life)
 {
@@ -121,9 +154,19 @@ function validateProcess(name , weight , life)
 	return band;
 }
 
-function deleteProcess()
+function deleteProcess(limI,limS,weight)
 {
+	for(var i = limI; i<limS; i++)
+	{
+		$("#row-"+i).html("<p>"+name+"</p>"); 
+
+			 			$("#row-"+i).removeClass('busy').addClass('empty');
+	}
+
+	size+=weight;
 }
+
+ 
 </script>
 
 </body>
