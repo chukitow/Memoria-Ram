@@ -56,12 +56,15 @@
 <script type="text/javascript">
 $(function(){
 
+	//Gloabl variables
+	var size = 20;
+
 	//Drawing the Table
 	
 	var table = '<table id="table-ram" class="table">';
 				for(var i=0; i<20;i++)
 				{
-					table+='<tr><td id="row-'+i+'"></td></tr>';
+					table+='<tr><td id="row-'+i+'" class="empty"></td></tr>';
 				}
 					'</tr>'+
 				'</table>';
@@ -75,7 +78,14 @@ $(function(){
 		var life = $("#life").val();
 		if(validateProcess(name, weight , life))
 		{
+			if(size - life >= 0)
+			{
 
+			}
+			else
+			{
+				
+			}
 		}
 
 	});
