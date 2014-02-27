@@ -150,6 +150,7 @@ function addProcess()
 
 				 	limS = index;
 				 	size-= weight;
+				 	alert(size);
 
 
 				 	ms = life * 1000;
@@ -191,7 +192,8 @@ function deleteProcess(limI,limS,weight)
 			 			$("#row-"+i).removeClass('busy').addClass('empty');
 	}
 
-	size+=weight;
+	size+=parseInt(weight);
+	alert(size);
 }
 
  
